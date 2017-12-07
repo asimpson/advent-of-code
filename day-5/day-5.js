@@ -1,16 +1,18 @@
 const fs = require('fs');
+let list;
 
-const list = fs.readFileSync('./day-5/input.txt').toString().split('\n');
+fs.readFile('./input.txt', (err, data) => {
+  list = data.toString().trim().split('\n').map(x => parseInt(x, 10));
+  go(list);
+});
 
 const go = list => {
   var moves = 0;
   var position = 0;
   for (; list[position] !== undefined; moves++) {
-    const pos = position + parseInt(list[position], 10);
-    list[position] = (parseInt(list[position], 10) + 1).toString();
+    const pos = position + list[position];
+    list[position] = list[position] + 1;
     position = pos;
   }
   console.log(moves);
 };
-
-go(list);
