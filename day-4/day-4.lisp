@@ -30,19 +30,18 @@
     (when (eql (length line) (length (remove-duplicates m :test #'equal)))
       (return-from ana 1))))
 
-(let (first-count second-count first second)
-  (setq first-count 0)
-  (setq second-count 0)
-  (with-open-file (file "./input.txt")
-                  (loop for line = (read-line file nil 'end)
-                        until (eq line 'end)
-                        do (progn
-                             (setq first (process (cl-strings:split line " ")))
-                             (setq second (ana (cl-strings:split line " ")))
-                             (when (numberp first)
-                               (setq first-count (+ first-count first)))
-                             (when (numberp second)
-                               (setq second-count (+ second-count second))))
-                        finally (print (concatenate 'string "
+(defun start()
+  (let ((first-count 0) (second-count 0) first second)
+    (with-open-file (file "./input.txt")
+                    (loop for line = (read-line file nil 'end)
+                          until (eq line 'end)
+                          do (progn
+                               (setq first (process (cl-strings:split line " ")))
+                               (setq second (ana (cl-strings:split line " ")))
+                               (when (numberp first)
+                                 (setq first-count (+ first-count first)))
+                               (when (numberp second)
+                                 (setq second-count (+ second-count second))))
+                          finally (print (concatenate 'string "Welcome!
 First rule: there are " (write-to-string first-count) " valid passphrases" "
-Second rule: there are " (write-to-string second-count) " valid passphrases.")))))
+Second rule: there are " (write-to-string second-count) " valid passphrases."))))))
