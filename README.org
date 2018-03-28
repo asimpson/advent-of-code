@@ -1,0 +1,5 @@
+* Advent of Code 2017
+
+🚨 I made this repo to be a scratchpad as I experiment with Lisp and learn Rust (for now). The code will probably be terrible and the commits sparse.
+
+✨ 📖 I've found [[http://adventofcode.com][Advent of Code]] to be a great way to learn (or experiment with) a programming language. It gives you small but non-trivial problems that force you to actually use the various features of whatever language you're using.
