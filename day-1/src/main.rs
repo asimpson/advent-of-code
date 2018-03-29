@@ -11,14 +11,8 @@ fn read() -> String {
     return input;
 }
 
-fn main() {
-  // let input = read();
-  // loop over each digit
-  // find every digit that is the same as the one ahead of it
-  // add these special digits together
-
+fn part_one() {
   let input = read();
-  // let input = "91212129";
   let p: Vec<_> = input.split("").collect();
 
   let s = p
@@ -32,11 +26,40 @@ fn main() {
   let start = s.iter().nth(0);
   let circle: Option<&i32> = if end == start { start } else { None };
 
+  // this can be refactored to use `fold`.
   let result: i32 = s
     .iter()
     .filter_map(|x| if Some(x) == prev { Some(x) } else { prev = Some(x); None })
     .sum();
 
-  // println!("{:?}", circle.unwrap())
   println!("The captcha is: {:?}", result + circle.unwrap());
+}
+
+fn part_two() {
+  let input = read();
+  let p: Vec<_> = input.split("").collect();
+
+  let s = p
+    .iter()
+    .filter(|&&x| x != "" && x != "\n")
+    .map(|x| x.parse::<usize>().expect("maps String to usize integer."))
+    .collect::<Vec<_>>();
+
+  let half = s.len() / 2;
+
+  let result = s.clone().iter().enumerate()
+    .fold(0, |acc, (i, x)| {
+      if s.iter().cycle().nth(i + half) == Some(x) {
+        acc + x
+      } else {
+        acc + 0
+      }
+    });
+
+  println!("second half: {:?}", result);
+}
+
+fn main() {
+  // part_one();
+  part_two();
 }

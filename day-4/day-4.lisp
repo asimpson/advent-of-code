@@ -25,8 +25,7 @@
     (return-from process 1)))
 
 (defun ana(line)
-  (let (m)
-    (setq m (map 'sequence (lambda(x) (sort x #'char>)) line))
+  (let ((m (map 'sequence (lambda(x) (sort x #'char>)) line)))
     (when (eql (length line) (length (remove-duplicates m :test #'equal)))
       (return-from ana 1))))
 
